@@ -1,6 +1,7 @@
 # 内容：GameDownload
 # 数量：20条
 DOMAIN,ssl-lvlt.cdn.ea.com
+DOMAIN,epicgames-download1.akamaized.net
 DOMAIN,origin-a.akamaihd.net
 DOMAIN,uplaypc-s-ubisoft.cdn.ubionline.com.cn
 DOMAIN,gamedownloads-rockstargames-com.akamaized.net
