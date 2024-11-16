@@ -2,6 +2,23 @@
 # 更新：2024-06-30 11:02:56
 # 数量：367条
 
+#plex
+DOMAIN-SUFFIX,metadata-static.plex.tv
+DOMAIN-SUFFIX,metadata.provider.plex.tv
+DOMAIN-SUFFIX,provider.plex.tv
+DOMAIN-SUFFIX,analytics.plex.tv
+DOMAIN-SUFFIX,meta.plex.tv
+DOMAIN-SUFFIX,support.plex.tv
+DOMAIN-SUFFIX,forums.plex.tv
+DOMAIN-SUFFIX,downloads.plex
+DOMAIN-SUFFIX,clients.plex.tv
+DOMAIN-SUFFIX,pubsub.plex.tv
+DOMAIN-SUFFIX,images.plex.tv
+DOMAIN-SUFFIX,together.plex.tv
+DOMAIN-SUFFIX,community.plex.tv
+DOMAIN-SUFFIX,scrobbles.plex.tv
+DOMAIN-SUFFIX,features.plex.tv
+
 # ABC
 DOMAIN-SUFFIX,edgedatg.com
 DOMAIN-SUFFIX,go.com
