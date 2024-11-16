@@ -18,6 +18,11 @@ DOMAIN-SUFFIX,together.plex.tv
 DOMAIN-SUFFIX,community.plex.tv
 DOMAIN-SUFFIX,scrobbles.plex.tv
 DOMAIN-SUFFIX,features.plex.tv
+DOMAIN-SUFFIX,lyrics.plex.tv
+DOMAIN-SUFFIX,mbz.plex.tv
+DOMAIN-SUFFIX,acoustid.plex.tv
+
+
 
 # ABC
 DOMAIN-SUFFIX,edgedatg.com
