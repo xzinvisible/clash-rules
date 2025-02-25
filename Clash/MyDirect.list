@@ -15,3 +15,6 @@ DOMAIN-SUFFIX,chdbits.xyz
 # SSH
 DST-PORT,22
 DST-PORT,10025
+
+# AntiFraud
+DOMAIN-SUFFIX,spaceship.com
