@@ -12,6 +12,8 @@ DOMAIN-SUFFIX,plex.direct
 DOMAIN-SUFFIX,ptchdbits.co
 DOMAIN-SUFFIX,rainbowisland.co
 DOMAIN-SUFFIX,chdbits.xyz
+SRC-PORT,51413
+
 # SSH
 DST-PORT,22
 DST-PORT,10025
