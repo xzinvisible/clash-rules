@@ -22,3 +22,4 @@ DST-PORT,10025
 
 # AntiFraud
 DOMAIN-SUFFIX,spaceship.com
+DOMAIN-SUFFIX,racknerd.com
