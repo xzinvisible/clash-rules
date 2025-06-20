@@ -126,19 +126,6 @@ dns:
     - tls://dot.360.cn:853
     - https://doh.360.cn/dns-query
 
-unified-delay: true                # 启用统一延迟功能（更换延迟计算方式,去除握手等额外延迟）
-tcp-concurrent: true               # 允许并发TCP连接（同时对所有ip进行连接，返回延迟最低的地址）
-find-process-mode: strict          # 指定Clash查找进程的模式
-global-client-fingerprint: chrome  # 全局客户端指纹的类型（random 表示随机指纹）
-geodata-loader: standard           # 指定地理数据加载器
-geodata-mode: true                 # 开启自定义GeoIP2
-geo-auto-update: true              # 开启自动更新GeoIP2
-geo-update-interval: 24            # 更新间隔（单位：小时）
-geox-url:                          # GeoIP2数据库链接
-  geoip: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat'
-  geosite: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat'
-  mmdb: 'https://gitlab.com/Masaiki/GeoIP2-CN/-/raw/release/Country.mmdb'
-  asn: 'https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb'
  
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
