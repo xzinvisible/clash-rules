@@ -67,7 +67,7 @@ sniffer:
   force-domain:               # 强制解析的域名列表
     - +.v2ex.com
   skip-domain:                # 跳过解析的域名列表
-    - Mijia Cloud
+#    - Mijia Cloud
     - "+.baidu.com"
 
 # 入站  
