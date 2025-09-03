@@ -186,6 +186,7 @@ rules:
   - GEOIP,CN,🎯 全球直连
   - RULE-SET,banad,🛑 广告拦截
   - RULE-SET,banprogramad,🛑 广告拦截
+  - RULE-SET,myban,🛑 广告拦截
   - RULE-SET,onedrive,Ⓜ️ 微软云盘
   - RULE-SET,microsoft,🪟 微软服务
   - RULE-SET,ai,💬 Ai平台
@@ -227,6 +228,7 @@ rule-providers:
   download: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Download.list"}
   banad: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/BanAD.list"}
   banprogramad: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/BanProgramAD.list"}
+  myban: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Myban.list"}
   onedrive: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/OneDrive.list"}
   microsoft: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Microsoft.list"}
   ai: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/AI.list"} 
