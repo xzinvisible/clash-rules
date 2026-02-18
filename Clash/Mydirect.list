@@ -1,0 +1,13 @@
+# plex
+DOMAIN,v4.plex.tv
+DOMAIN,v6.plex.tv
+
+# personal
+DOMAIN-SUFFIX,zinvisible.com
+DOMAIN-SUFFIX,zinvisible.net
+DOMAIN-SUFFIX,zexin.one
+DOMAIN-SUFFIX,theinvisible.xyz
+
+IP-CIDR,46.232.108.155/32,no-resolve
+IP-CIDR,163.223.182.96,no-resolve
+IP-CIDR,142.171.77.152,no-resolve

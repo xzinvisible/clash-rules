@@ -1,0 +1,16 @@
+# 内容：自定义
+# 数量：0条
+
+#DOMAIN-SUFFIX,xbox.com
+DOMAIN-SUFFIX,18comic.vip
+DOMAIN-SUFFIX,manhuabika.com
+
+# Plex
+DOMAIN-SUFFIX,metadata.provider.plex.tv
+DOMAIN-SUFFIX,metadata.provider.plex.tv
+DOMAIN-SUFFIX,metadata-static.plex.tv
+DOMAIN-SUFFIX,plex.tv
+DOMAIN-SUFFIX,metadata.provider.plex.tv
+DOMAIN-SUFFIX,analytics.plex.tv
+DOMAIN-SUFFIX,metadata-static.plex.tv
+DOMAIN-SUFFIX,meta.plex.tv
