@@ -1,0 +1,247 @@
+# 全局配置 
+# 自动同步时间以防止时间不准导致无法正常联网
+#ntp:
+#  enable: true
+  # 是否同步至系统时间，需要 root/管理员权限
+#  write-to-system: false
+#  server: time.apple.com
+#  port: 123
+#  interval: 30
+  
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+allow-lan: true
+bind-address: "*"
+ipv6: false
+log-level: warning
+
+# interface-name: en0
+global-client-fingerprint: chrome
+keep-alive-idle: 600
+keep-alive-interval: 15
+disable-keep-alive: false
+profile:
+  store-selected: true
+  store-fake-ip: true
+unified-delay: true                # 启用统一延迟功能（更换延迟计算方式,去除握手等额外延迟）Add commentMore actions
+tcp-concurrent: true               # 允许并发TCP连接（同时对所有ip进行连接，返回延迟最低的地址）
+find-process-mode: strict          # 指定Clash查找进程的模式
+#global-client-fingerprint: chrome  # 全局客户端指纹的类型（random 表示随机指纹）
+geodata-loader: standard           # 指定地理数据加载器
+geodata-mode: true                 # 开启自定义GeoIP2
+geo-auto-update: true              # 开启自动更新GeoIP2
+geo-update-interval: 24            # 更新间隔（单位：小时）
+geox-url:                          # GeoIP2数据库链接
+  geoip: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat'
+  geosite: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat'
+  mmdb: 'https://gitlab.com/Masaiki/GeoIP2-CN/-/raw/release/Country.mmdb'
+  asn: 'https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb'
+
+# 控制面板
+#external-controller: 0.0.0.0:9090
+#secret: ""
+#external-ui: "/etc/mihomo/run/ui"
+#external-ui-name: zashboard
+#external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+# 嗅探
+
+sniffer:
+  enable: true                # 启用嗅探功能
+  force-dns-mapping: true     # 强制执行DNS映射规则
+  parse-pure-ip: true         # 解析纯IP流量
+  override-destination: true  # 覆盖流量的目标地址
+  sniff:                      # 配置嗅探规则端口
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:               # 强制解析的域名列表
+    - +.v2ex.com
+  skip-domain:                # 跳过解析的域名列表
+#    - Mijia Cloud
+    - "+.baidu.com"
+
+# 入站  
+tun:
+  enable: true
+  # system/gvisor/mixed
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53", "any:853"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS模块
+dns:
+  proxy: true
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.srv.nintendo.net"
+    - "*.stun.playstation.net"
+    - "xbox.*.microsoft.com"
+    - "*.xboxlive.com"
+    - "*.teafone.com"
+    - "*.sktswe.net"
+    - "rtc.goodfone.co.kr"
+    - "*.chattti.com"
+  fallback-filter:
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 224.0.0.0/4
+      - 240.0.0.0/4
+      - 255.255.255.255/32
+      - ::/128
+      - ::1/128
+      - ::ffff:0:0/96
+      - 64:ff9b::/96
+      - 100::/64
+      - 2001::/32
+      - 2001:20::/28
+      - 2001:db8::/32
+      - 2002::/16
+      - fc00::/7
+      - fe80::/10
+      - ff00::/8
+  default-nameserver:
+    - 223.5.5.5  
+    - 119.29.29.29  
+  nameserver:
+    - 'https://cloudflare-dns.com/dns-query#proxy'
+    - 'https://dns.google/dns-query#proxy'
+    - 'tls://1.1.1.1:853#proxy'
+    - 'tls://8.8.8.8:853#proxy'
+  direct-nameserver:
+    - https://doh.pub/dns-query
+    - tls://119.29.29.29:853
+    - https://223.5.5.5/dns-query
+    - tls://223.5.5.5:853
+    - tls://114.114.114.114:853
+    - tls://dot.360.cn:853
+    - https://doh.360.cn/dns-query
+
+ 
+# 出站策略
+# 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
+pr: &pr {type: select, proxies: [🚀 默认代理, 🇭🇰 香港节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇨🇳 台湾节点, 🌍 特殊节点, 🚀 手动切换, DIRECT]}
+proxy-groups:
+  - {name: 🚀 默认代理, type: select, proxies: [🇭🇰 香港节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇨🇳 台湾节点, 🌍 特殊节点, 🚀 手动切换, DIRECT]}
+  - {name: 🚀 手动切换, type: select, include-all: true}
+  - {name: 🐟 漏网之鱼, <<: *pr}
+  - {name: 🎮 游戏平台, <<: *pr}
+  - {name: 💬 Ai平台, <<: *pr}
+  - {name: Ⓜ️ 微软云盘, <<: *pr}
+  - {name: 🪟 微软服务, <<: *pr}
+  - {name: 📺 哔哩哔哩, type: select, proxies: [🎯 全球直连, 🇭🇰 香港节点, 🇨🇳 台湾节点]}
+  - {name: 🎥 奈飞视频, type: select, proxies: [🎥 奈飞节点, 🚀 默认代理, 🇭🇰 香港节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇨🇳 台湾节点, 🌍 特殊节点, 🚀 手动切换, DIRECT]}
+  - {name: 🛠️ 自定义, <<: *pr}
+
+  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|HK|hk|Hong Kong|HongKong|hongkong"}
+  - {name: 🇺🇲 美国节点, type: select, include-all: true, filter: "^(?=.*(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|LA|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States))(?!.*(Claw)).*"}
+  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan"}
+  - {name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?i)新加坡|坡|狮城|SG|Singapore"}
+  - {name: 🇨🇳 台湾节点, type: select, include-all: true, filter: "(?i)台|新北|彰化|TW|Taiwan"}
+  - {name: 🌍 特殊节点, type: select, include-all: true, filter: "(?i)土|土耳其|阿|阿根廷|尼|尼日利亚|印度|Tr|Turkey|TR|AG|Ag|Argentina|Nigeria|NI|Ni"}
+  - {name: 🎥 奈飞节点, type: select, include-all: true, filter: "(?i)NF|奈飞|解锁|Netflix|NETFLIX|Media"}
+
+  - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 默认代理]}
+  - {name: 🛑 广告拦截, type: select, proxies: [REJECT, DIRECT]}
+
+# 规则匹配
+# 此规则部分没有做防泄露处理，因为弊严重大于利！
+rules:
+  - RULE-SET,myproxy,🛠️ 自定义
+  - RULE-SET,mydirect,🎯 全球直连
+  - RULE-SET,bilibilihmt,📺 哔哩哔哩
+  - RULE-SET,bilibili,📺 哔哩哔哩
+  - RULE-SET,lan,🎯 全球直连
+  - RULE-SET,unban,🎯 全球直连
+  - RULE-SET,googlecn,🎯 全球直连
+  - RULE-SET,steamcn,🎯 全球直连
+  - RULE-SET,googlefcm,🎯 全球直连
+  - RULE-SET,apple,🎯 全球直连
+  - RULE-SET,chinamedia,🎯 全球直连
+  - RULE-SET,chinaip,🎯 全球直连
+  - RULE-SET,chinadomain,🎯 全球直连
+  - RULE-SET,chinacompanyip,🎯 全球直连
+  - RULE-SET,download,🎯 全球直连
+  - GEOIP,LAN,🎯 全球直连
+  - GEOIP,CN,🎯 全球直连
+  - RULE-SET,banad,🛑 广告拦截
+  - RULE-SET,banprogramad,🛑 广告拦截
+  - RULE-SET,myban,🛑 广告拦截
+  - RULE-SET,onedrive,Ⓜ️ 微软云盘
+  - RULE-SET,microsoft,🪟 微软服务
+  - RULE-SET,ai,💬 Ai平台
+  - RULE-SET,openai,💬 Ai平台
+  - RULE-SET,epic,🎮 游戏平台
+  - RULE-SET,origin,🎮 游戏平台
+  - RULE-SET,sony,🎮 游戏平台
+  - RULE-SET,steam,🎮 游戏平台
+  - RULE-SET,nintendo,🎮 游戏平台
+  - RULE-SET,netflix,🎥 奈飞视频
+  - RULE-SET,gfwlist,🚀 默认代理
+  - RULE-SET,proxymedia,🚀 默认代理
+  - RULE-SET,telegram,🚀 默认代理
+  - RULE-SET,youtube,🚀 默认代理
+  - RULE-SET,bing,🚀 默认代理
+  - MATCH,🐟 漏网之鱼
+  
+
+# 规则集
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+rule-providers: 
+  myproxy: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Myproxy.list"}
+  mydirect: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Mydirect.list"}
+  bilibilihmt: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/BilibiliHMT.list"}
+  bilibili: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Bilibili.list"}
+  lan: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/LocalAreaNetwork.list"}
+  unban: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/UnBan.list"}
+  googlecn: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/GoogleCN.list"}
+  steamcn: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/SteamCN.list"}
+  googlefcm: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/GoogleFCM.list"}
+  apple: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Apple.list"}
+  chinamedia: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ChinaMedia.list"}
+  chinaip: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ChinaIp.list"}
+  chinadomain: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ChinaDomain.list"}
+  chinacompanyip: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ChinaCompanyIp.list"}
+  download: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Download.list"}
+  banad: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/BanAD.list"}
+  banprogramad: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/BanProgramAD.list"}
+  myban: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Myban.list"}
+  onedrive: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/OneDrive.list"}
+  microsoft: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Microsoft.list"}
+  ai: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/AI.list"} 
+  openai: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/OpenAi.list"}
+  epic: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Epic.list"}
+  origin: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Origin.list"}
+  sony: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Sony.list"}
+  steam: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Steam.list"}
+  nintendo: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Nintendo.list"}
+  netflix: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/Netflix.list"}
+  gfwlist: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ProxyGFWlist.list"}
+  proxymedia: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/ProxyMedia.list"}
+  telegram: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Telegram.list"}
+  youtube: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Ruleset/YouTube.list"}
+  bing: { <<: *class, url: "https://raw.githubusercontent.com/xzinvisible/clash-rules/master/Clash/Bing.list"}
+
